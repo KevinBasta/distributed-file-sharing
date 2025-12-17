@@ -1,18 +1,16 @@
-mod client;
-mod torrent;
-mod peer;
-mod protocol;
-mod bencoding;
-
-use crate::torrent::{Torrent};
-use tokio;
-
-#[tokio::main]
-async fn main() {
+use std::{io::Write, net::TcpStream};
 
 
-    let mut tor = Torrent::new(String::from("Hello, world!"));
-    Torrent::runtime().await    ;
-    
-    println!("Hello, world!");
+
+fn connectToPeer() {
+    let mut stream = TcpStream::connect("127.0.0.1:8080").unwrap();
+
+    let result = stream.write(b"Hello socket :)").unwrap();
+    println!("{result}");
+}
+
+fn main() {
+    println!("Hello world");
+
+    connectToPeer();
 }
